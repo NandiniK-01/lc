@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <title>Student Registration Form</title>
+  <style>
+    
+    .container{
+      background-color: #f8f1fa;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Student Registration Form</h2>
+
+  <form id="registrationForm">
+    <div class="form-group mb-3">
+        <label for="fullName">Full Name:</label>
+        <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+    </div>
+
+
+
+    <div class="form-group mb-3">
+      <label for="email">Email ID:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter your email address" pattern=".+@.+" title="Include @ in the email address" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="gender">Gender:</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gender" id="gender" value="male" required>
+        <label class="form-check-label" for="male">Male</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gender" id="gender" value="female" required>
+        <label class="form-check-label" for="female">Female</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gender" id="gender" value="other" required>
+        <label class="form-check-label" for="other">Other</label>
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="mr-2" for="hobbies">Hobbies:</label>
+      <div class="d-flex flex-wrap">
+        <div class="form-check mr-3 mb-2">
+          <input class="form-check-input hobby" type="checkbox" id="hobbies" value="reading" >
+          <label class="form-check-label " for="reading">Reading</label>
+        </div>
+        <div class="form-check mr-3">
+          <input class="form-check-input hobby" type="checkbox" id="hobbies" value="sports" >
+          <label class="form-check-label" for="sports">Sports</label>
+        </div>
+        <div class="form-check mr-3">
+          <input class="form-check-input hobby" type="checkbox" id="hobbies" value="dance" >
+          <label class="form-check-label" for="dance">Dance</label>
+        </div>
+        <div class="form-check mr-3">
+          <input class="form-check-input hobby" type="checkbox" id="hobbies" value="Painting" >
+          <label class="form-check-label" for="painting">Painting</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="department">Department:</label>
+      <div class="dropdown">
+        <select class="form-select" aria-label="Default select example" id="department">
+          <option value="" selected disabled>Select Department</option>
+          <option value="electrical">Electrical Engineering</option>
+          <option value="mechanical">Mechanical Engineering</option>
+          <option value="it">IT Engineering</option>
+          <!-- Add more options as needed -->
+        </select>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter your phone number" maxlength="10" required>
+    </div>
+    <input type="submit" onClick="myFunction()" value="HOME" class="button" />
+  <!-- <script>
+    function myFunction() {
+      window.location.href = "display.html";
+    }
+  </script> -->
+    <button type="button" class="btn btn-primary" onclick="submitForm()" >Submit</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  let arr = []; 
+  for(let i=0; i<4; i++){
+  document.getElementsByClassName("hobby")[i].addEventListener("change",( e)=>{
+    if(arr.includes(e.target.value)){
+      const index = arr.indexOf(e.target.value);
+      arr.splice(index, 1);
+    }else{
+    arr.push(e.target.value)
+    }
+    console.log(arr);
+  })
+}
+  function submitForm() {
+    // Your existing form submission logic
+    
+  
+    // Retrieve form data
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const hobbies = document.getElementById('hobbies').value;
+    const department = document.getElementById('department').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    // Add more fields as needed
+  
+    // Create an object to store form data
+    const formData = {
+      fullName,
+      email,
+      password,
+      gender,
+      arr,
+      department,
+      phoneNumber
+      // Add more fields as needed
+      
+    };
+
+    // console.log(formData);
+    // string str = a + b
+    // a = items 
+    // b = new items
+    // str = fresh data to store
+  
+    // Retrieve existing form history from local storage
+    let formHistory = JSON.parse(localStorage.getItem('formHistory')) || [];
+  
+    // Add current form data to the history
+    formHistory.push(formData);
+  
+    // Save updated form history to local storage
+    localStorage.setItem('formHistory', JSON.stringify(formHistory));
+  
+    // Open a new HTML file to display form details in a table format
+   // window.location.href = 'display.html';
+   window.location.href = "display.html";
+  }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
